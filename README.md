@@ -80,7 +80,7 @@ GOS API 接入文档
             console.log(ret.head_block_num)
           })()
           
-          7、交易的签名及提交
+         7、交易的签名及提交
              1）、签名交易
              let tx = {
                 actions: [{
@@ -106,15 +106,15 @@ GOS API 接入文档
                console.log(signature)
              })()
       
-        2）、提交交易
-          (async()=>{
-             let params = {
-             serializedTransaction:seTx,
-             signatures: signature
-             }
-             let ret = await api.pushSignedTransaction(params)
-             console.log(ret)
-          })()
+           2）、提交交易
+            (async()=>{
+               let params = {
+               serializedTransaction:seTx,
+               signatures: signature
+               }
+               let ret = await api.pushSignedTransaction(params)
+               console.log(ret)
+            })()
 
 三、接入步骤
     
