@@ -24,32 +24,28 @@ GOS API 接入文档
    eosjs-ecc是gos处理密钥和签名的javascript开发包。
 
    nodejs环境下，使用NPM安装nodejs包：
-   ~$ npm install eosjs-ecc
+       ~$ npm install eosjs-ecc
    
-   浏览器环境下，可以在这里下载 预编译的eosjs-ecc库，然后在HTML中引用即可：
-   <html><head>
-     <meta charset="utf-8">
-     <!--
-     sha512-cL+IQQaQ586s9DrXfGtDheRpj5iDKh2M+xlpfwbhNjRIp4BGQ1fkM/vB4Ta8mc+f51YBW9sJiPcyMDIreJe6gQ== lib/eosjs-ecc.js
-     sha512-dYFDmK/d9r3/NCp6toLtfkwOjSMRBaEzaGAx1tfRItC0nsI0hVLERk05iNBQR7uDNI7ludYhcBI4vUiFHdjsTQ== lib/eosjs-ecc.min.js
-     sha512-eq1SCoSe38uR1UVuQMwR73VgY8qKTBDc87n2nIiC5WLhn1o2y1U6c5wY8lrigVX7INM8fM0PxDlMX5WvpghKig== lib/eosjs-ecc.min.js.map
-     -->
-     <script src="https://cdn.jsdelivr.net/npm/eosjs-ecc@4.0.4/lib/eosjs-ecc.min.js"
-       integrity="sha512-dYFDmK/d9r3/NCp6toLtfkwOjSMRBaEzaGAx1tfRItC0nsI0hVLERk05iNBQR7uDNI7ludYhcBI4vUiFHdjsTQ=="
-       crossorigin="anonymous"></script>
-   </head><body>
-     See console object: eosjs_ecc</body></html>
+       浏览器环境下，可以在这里下载 预编译的eosjs-ecc库，然后在HTML中引用即可：
+       <html><head>
+         <meta charset="utf-8">
+          
+         <script src="https://cdn.jsdelivr.net/npm/eosjs-ecc@4.0.4/lib/eosjs-ecc.min.js"
+           integrity="sha512-dYFDmK/d9r3/NCp6toLtfkwOjSMRBaEzaGAx1tfRItC0nsI0hVLERk05iNBQR7uDNI7ludYhcBI4vUiFHdjsTQ=="
+           crossorigin="anonymous"></script>
+       </head><body>
+         See console object: eosjs_ecc</body></html>
 
 
-      引用该库文件后，通过以下代码实现公钥创建：
-      import ecc from 'eosjs-ecc/lib'
+       引用该库文件后，通过以下代码实现公钥创建：
+       import ecc from 'eosjs-ecc/lib'
 
-   // 密码加密       
-    const seed = await util.PasswordService.encrypt(password);                // 
-   // 私钥加密        
-   const encryptedPrivateKey = util.CryptoAES.encrypt(privateKey, seed);        
-   // 公钥        
-   const publicKey =ecc.PrivateKey(privateKey).toPublic().toString('GOS');                
+      // 密码加密       
+       const seed = await util.PasswordService.encrypt(password);                // 
+      // 私钥加密        
+      const encryptedPrivateKey = util.CryptoAES.encrypt(privateKey, seed);        
+      // 公钥        
+      const publicKey =ecc.PrivateKey(privateKey).toPublic().toString('GOS');                
 
 
 
@@ -67,22 +63,22 @@ GOS API 接入文档
    const rpc = new JsonRpc('http://'+ENDPOINT+':'+8888);const signatureProvider = new JsSignatureProvider(['....']);const     api = new Api({rpc,signatureProvider,textDecoder: new TextDecoder(), textEncoder: new TextEncoder() })
  
 5、查询交易
-  创建 API 对象后：
-   (async ()=>{
-     let ret = await rpc.history_get_transasction('...')
-     console.log(ret)
-   })()
+   创建 API 对象后：
+     (async ()=>{
+       let ret = await rpc.history_get_transasction('...')
+       console.log(ret)
+     })()
 
-   history_get_transaction(id: string, block_num_hint?: number): Promise<any>的参数
-   id：交易ID
-   block_num_hint：
+    history_get_transaction(id: string, block_num_hint?: number): Promise<any>的参数
+      id：交易ID
+      block_num_hint：
 
 6、查询高度
    通过以下代码实现查询区块高度：
-   (async ()=>{
-     let ret = await rpc.get_info()
-     console.log(ret.head_block_num)
-   })()
+     (async ()=>{
+       let ret = await rpc.get_info()
+       console.log(ret.head_block_num)
+     })()
 
 7、交易的签名及提交
    1）、签名交易
