@@ -68,19 +68,68 @@ const rpc = new JsonRpc('http://'+ENDPOINT+':'+8888);const signatureProvider = n
 
 
 5、查询交易
-参见 GosJS 文档
+  创建 API 对象后：
+   (async ()=>{
+     let ret = await rpc.history_get_transasction('...')
+     console.log(ret)
+   })()
+
+   history_get_transaction(id: string, block_num_hint?: number): Promise<any>的参数
+   id：交易ID
+   block_num_hint：
 
 6、查询高度
-通过以下代码实现查询区块高度：
+   通过以下代码实现查询区块高度：
+   (async ()=>{
+     let ret = await rpc.get_info()
+     console.log(ret.head_block_num)
+   })()
 
-7、修改账号权限
-通过以下代码实现查询区块高度：
+7、交易的签名及提交
+   1）、签名交易
+      let tx = {
+         actions: [{
+         account: 'tommy',
+         name: 'hi',
+         authorization: [{
+               actor: 'tommy',
+               permission: 'active',
+         }],
+         data: {
+            user: 'tommy'
+            },
+         }]
+      }
+      let seTx = api.serializeTransaction(tx)
+      console.log(seTx)
+      
+      const ecc = require('eosjs-ecc')
 
-
-8、交易格式分析：
+      (async()=>{
+        let priv = '5JbrPk2h9kNtsmKTauKar5PtmE5nPhtF8BcVUSzGrZhFV7UvccK'
+        let signature = ecc.sign('gos.global is test',priv)
+        console.log(signature)
+      })()
+      
+   2）、提交交易
+      (async()=>{
+         let params = {
+         serializedTransaction:seTx,
+         signatures: signature
+         }
+         let ret = await api.pushSignedTransaction(params)
+         console.log(ret)
+      })()
 
 三、接入步骤
-1、下载 gosjs.js
-2、创建私钥及账号
-3、转账测试
-4、查询交易
+   1、下载 gosjs.js 及安装 ecc 加密包
+
+   2、创建私钥及账号
+      通过 ECC加密模块实现加密。
+      先创建私钥，再推导出公钥，保护好自己的私钥
+      
+   3、转账测试
+      实现与 GOS 公链的账号进行交互操作
+      
+   4、查询交易
+      通过GOS区块浏览器查询交易
