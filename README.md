@@ -9,23 +9,22 @@ GOS API 接入文档
    GOS 公链备受交易所关注，为提供与各开发社区及交易所对接需求，提供本文档，帮助个接入公链的技术团队、组织实现与 GOS 公链对接，开发满足交易需求的去中心化应用。
 
 二、功能
+      1、节点测试
+         提供接入测试节点：
+         ENDPOINT:  3.112.175.146
+         PORT: 8888
 
-   1、节点测试
-      提供接入测试节点：
-      ENDPOINT:  3.112.175.146
-      PORT: 8888
+         即可以通过该节点的8888端口获得 GOS 公链测试接入功能。
+         GOS目前提供 JS API 实现接入，可以使用如下的 js 库文件：
 
-      即可以通过该节点的8888端口获得 GOS 公链测试接入功能。
-      GOS目前提供 JS API 实现接入，可以使用如下的 js 库文件：
+         const { Api, JsonRpc, RpcError } = require(‘gosjs’);
 
-      const { Api, JsonRpc, RpcError } = require(‘gosjs’);
-      
       
       2、公私钥创建
-      eosjs-ecc是gos处理密钥和签名的javascript开发包。
+        eosjs-ecc是gos处理密钥和签名的javascript开发包。
 
-      nodejs环境下，使用NPM安装nodejs包：
-       ~$ npm install eosjs-ecc
+        nodejs环境下，使用NPM安装nodejs包：
+         ~$ npm install eosjs-ecc
    
        浏览器环境下，可以在这里下载 预编译的eosjs-ecc库，然后在HTML中引用即可：
        <html><head>
@@ -41,12 +40,12 @@ GOS API 接入文档
        引用该库文件后，通过以下代码实现公钥创建：
        import ecc from 'eosjs-ecc/lib'
 
-      // 密码加密       
-       const seed = await util.PasswordService.encrypt(password);                // 
-      // 私钥加密        
-      const encryptedPrivateKey = util.CryptoAES.encrypt(privateKey, seed);        
-      // 公钥        
-      const publicKey =ecc.PrivateKey(privateKey).toPublic().toString('GOS');                
+        // 密码加密       
+         const seed = await util.PasswordService.encrypt(password);   
+        // 私钥加密        
+        const encryptedPrivateKey = util.CryptoAES.encrypt(privateKey, seed);        
+        // 公钥        
+        const publicKey =ecc.PrivateKey(privateKey).toPublic().toString('GOS');                
       
       
       3、账号注册
@@ -60,7 +59,7 @@ GOS API 接入文档
       import {Api,JsonRpc,JsSignatureProvider} from 'eosjs'
       import { TextDecoder, TextEncoder } from 'text-encoding'
 
-      const rpc = new JsonRpc('http://'+ENDPOINT+':'+8888);const signatureProvider = new JsSignatureProvider(['....']);const     api = new Api({rpc,signatureProvider,textDecoder: new TextDecoder(), textEncoder: new TextEncoder() })
+      const rpc = new JsonRpc('http://'+ENDPOINT+':'+8888);const signatureProvider = new JsSignatureProvider(['....']);const       api = new Api({rpc,signatureProvider,textDecoder: new TextDecoder(), textEncoder: new TextEncoder() })
       
       
       5、查询交易
@@ -82,8 +81,7 @@ GOS API 接入文档
           })()
           
           7、交易的签名及提交
-          
-            1）、签名交易
+             1）、签名交易
              let tx = {
                 actions: [{
                 account: 'tommy',
@@ -108,8 +106,7 @@ GOS API 接入文档
                console.log(signature)
              })()
       
-      
-      2）、提交交易
+        2）、提交交易
           (async()=>{
              let params = {
              serializedTransaction:seTx,
